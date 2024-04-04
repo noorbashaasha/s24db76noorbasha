@@ -1,24 +1,15 @@
 extends layout
-
+ 
 block content
   h1= title
-  .container-fluid
-    .row
-      -
-      for ford in fords
-        .col-sm-2
-          h3= `name: ${ford.name}`
-          p= `price: ${ford.price}`
-          p= `year: ${ford.year}`
-  br
-  h5= 'Buy'
-
+  - let items = results;
   div(class="container-fluid")
-    each ford, index in fords
-      div(class="row", onclick=`buy(${index})`)
-        div(class="col-sm-2")
-          | ford #{index}: #{ford.name} Model: #{ford.price} Year: #{ford.year}
+    div(class="row")
+      each item, index in items  
+        div(class="col-sm-2",onclick=`buy(${index})`)
+          p #{item.fords_name}
+          p #{item.fords_price}
+          p #{item.fords_year}
   script.
-    function buy(price){
-      alert('You purchased item ' + price);
-    }
+    function buy(index) {
+    alert("You purchased item " + index);}

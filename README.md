@@ -1,5 +1,5 @@
 https://s24db76noorbasha.onrender.com(render link)
 
-*ford_name(string)
-*ford_price(number)
-*ford_year(number)
+*fords_name(string)
+*fords_price(number)
+*fords_year(number)
