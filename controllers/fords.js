@@ -4,8 +4,17 @@ exports.fords_list = function (req, res) {
     res.send('NOT IMPLEMENTED: fordslist');
 };
 // for a specific fords.
-exports.fords_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: fords detail: ' + req.params.id);
+exports.fords_detail = async function (req, res) {
+        console.log("detail" + req.params.id)
+        try {
+        result = await fords.findById( req.params.id)
+        res.send(result)
+        } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+        }
+        
+        
 };
 // Handle fords create on POST.
 exports.fords_create_post = function (req, res) {
@@ -16,9 +25,26 @@ exports.fords_delete = function (req, res) {
     res.send('NOT IMPLEMENTED: fords delete DELETE ' + req.params.id);
 };
 // Handle fords update form on PUT.
-exports.fords_update_put = function (req, res) {
-    res.send('NOT IMPLEMENTED: fords update PUT' + req.params.id);
+exports.fords_update_put = async function (req, res) {
+console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+try {
+let toUpdate = await fords.findById( req.params.id)
+// Do updates of properties
+if(req.body.fords_name)
+toUpdate.fords_name = req.body.fords_name;
+if(req.body.fords_price) toUpdate.fords_price = req.body.fords_price;
+if(req.body.fords_year) toUpdate.fords_year = req.body.fords_year;
+let result = await toUpdate.save();
+console.log("Sucess " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+}
 };
+
 
 
 exports.fords_list = async function (req, res) {
