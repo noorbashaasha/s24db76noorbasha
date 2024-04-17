@@ -9,8 +9,6 @@ router.get('/', api_controller.api);
 /// fords ROUTES ///
 // POST request for creating a fords.
 router.post('/fords', fords_controller.fords_create_post);
-// DELETE request to delete fords.
-router.delete('/fords/:id', fords_controller.fords_delete);
 // PUT request to update fords.
 router.put('/fords/:id', fords_controller.fords_update_put);
 // GET request for one fords.

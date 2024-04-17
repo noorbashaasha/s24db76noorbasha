@@ -1,0 +1,24 @@
+extends layout
+block content
+  h1= title
+
+  if toShow == null
+    h2 No instance to show
+  else
+    - let fordsid = toShow._id
+    - let fords_name = toShow.fords_name
+    - let fords_year = toShow.fords_year
+    - let fords_price = toShow.fords_price 
+    div
+      div.row
+        div.fordsAttr.mr-3 fords ID is:
+        div #{fordsid}
+      div.row
+        div.fordsAttr.mr-3 fords name is:
+        div #{fords_name}
+      div.row
+        div.fordsAttr.mr-3 fords year is:
+        div #{fords_year}
+      div.row
+        div.fordsAttr.mr-3 fords Price is:
+        div #{fords_price}

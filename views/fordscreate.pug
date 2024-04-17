@@ -1,0 +1,43 @@
+extends layout
+ 
+block content
+  h1= title
+  style.
+    body {
+      background-color: pink;
+    }
+    .form-group {
+      border: 2px solid black;
+      border-radius:10px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  form(id='fordsForm', action="/resource/fords", method="POST")
+    div.form-group
+      label.fordsAttr(for='fords_type') ford  name 
+      input#fords_type(type='name', name='fords_type')
+    div.form-group
+      label.fordsAttr(for='price') ford price
+      input#sprice(type='price', name='price')
+    div.form-group
+      label.fordsAttr(for='year') ford year
+      input#cost(type='year', name='year')
+    input(type="submit")
+ 
+  script.
+    document.forms['fordsForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Save succeeded");
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Save failed " + error );
+      });
+    });

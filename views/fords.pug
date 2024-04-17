@@ -3,13 +3,21 @@ extends layout
 block content
   h1= title
   - let items = results;
+  a.btn.btn-primary(href="/fords/create") Create fords items 
   div(class="container-fluid")
     div(class="row")
-      each item, index in items  
+      each item, index in items
+        - let destination = `dispatch(\"/fords/update?id=${item._id}\")` 
+        - let deletefords = `dispatch(\"/fords/delete?id=${item._id}\")` 
+        - let detail = `dispatch(\"/fords/detail?id=${item._id}\")`  
         div(class="col-sm-2",onclick=`buy(${index})`)
           p #{item.fords_name}
           p #{item.fords_price}
           p #{item.fords_year}
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
+          button.btn( class="btn-primary ml-1", onclick= deletefords) delete
+          button.btn( class="btn-primary ml-1", onclick= detail) detail 
   script.
-    function buy(index) {
-    alert("You purchased item " + index);}
+    function dispatch(path) {
+    window.location.href=path
+    }
